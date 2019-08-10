@@ -169,8 +169,8 @@ function initializeCardForDevice(device) {
     template.querySelector('.range-speed').addEventListener('input', throttledUpdateCarState);
     template.querySelector('.button-standby').addEventListener('click', () => {
         getDeviceDirectionInput(device).value = 0;
-//         getDeviceSpeedInput(device).value = 0;
-        getDeviceSpeedInput(device).value = 3;
+        getDeviceSpeedInput(device).value = 0;
+//         getDeviceSpeedInput(device).value = 3;
         updateCarState(device, 0).catch(e => onScreenLog(`ERROR on updateCarState(): ${e}\n${e.stack}`));
     });
     template.querySelector('.button-brake').addEventListener('mousedown', () => {
@@ -227,6 +227,7 @@ function updateConnectionStatus(device, status) {
 async function updateCarState(device, brake) {
     const rangeDirection = getDeviceDirectionInput(device);
     const rangeSpeed = getDeviceSpeedInput(device);
+    rangeSpeed = 3;
 
     onScreenLog(`${rangeDirection.value} ${rangeSpeed.value} ${brake}`);
     onScreenLog('============');
