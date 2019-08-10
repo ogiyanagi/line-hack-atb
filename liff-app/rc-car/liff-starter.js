@@ -2,7 +2,7 @@ const RCCAR_SERVICE_UUID = "8922e970-329d-44cb-badb-10070ef94b1d";
 // x, y, z: int16 * 3 = 6 byte: g * 1000
 // Compatible with BBC micro:bit Accelerometer Characteristic
 // https://lancaster-university.github.io/microbit-docs/resources/bluetooth/bluetooth_profile.html
-const RCCAR_CHARACTERISTIC_UUID = "hoge";
+const RCCAR_CHARACTERISTIC_UUID = "e625601e-9e55-4597-a598-76018a0d203d";
 
 const deviceUUIDSet = new Set();
 const connectedUUIDSet = new Set();
