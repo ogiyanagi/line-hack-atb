@@ -1,4 +1,4 @@
-const RCCAR_SERVICE_UUID = "8922e970-329d-44cb-badb-10070ef94b1d";
+const RCCAR_SERVICE_UUID = "06993055-d3c7-4602-b437-4ab3818e16c1";
 // x, y, z: int16 * 3 = 6 byte: g * 1000
 // Compatible with BBC micro:bit Accelerometer Characteristic
 // https://lancaster-university.github.io/microbit-docs/resources/bluetooth/bluetooth_profile.html
