@@ -3,6 +3,7 @@ const RCCAR_SERVICE_UUID = "8922e970-329d-44cb-badb-10070ef94b1d";
 // Compatible with BBC micro:bit Accelerometer Characteristic
 // https://lancaster-university.github.io/microbit-docs/resources/bluetooth/bluetooth_profile.html
 const RCCAR_CHARACTERISTIC_UUID = "e625601e-9e55-4597-a598-76018a0d203d";
+const RCDAY_CHARACTERISTIC_UUID = "b2a70845-b1d1-4420-b260-fa9551bfe361";
 
 const deviceUUIDSet = new Set();
 const connectedUUIDSet = new Set();
@@ -150,7 +151,7 @@ function initializeCardForDevice(device) {
     const throttledUpdateCarState = (() => {
         const interval = 100;
         let lastTime = new Date().getTime() - interval
-      
+
         return () => {
             if ((lastTime + interval) <= new Date().getTime()) {
                 lastTime = new Date().getTime();
@@ -158,9 +159,11 @@ function initializeCardForDevice(device) {
             }
         };
     })();
-
     template.querySelector('.range-direction').addEventListener('change', () => {
         updateCarState(device, 0).catch(e => onScreenLog(`ERROR on updateCarState(): ${e}\n${e.stack}`));
+    });
+    template.querySelector('.omake-submit').addEventListener('change', () => {
+        updateDayState(device).catch(e => onScreenLog(`ERROR on updateDayState(): ${e}\n${e.stack}`));
     });
     template.querySelector('.range-speed').addEventListener('change', () => {
         updateCarState(device, 0).catch(e => onScreenLog(`ERROR on updateCarState(): ${e}\n${e.stack}`));
@@ -237,6 +240,13 @@ async function updateCarState(device, brake) {
     await writeCharacteristic(characteristic, [rangeSpeed.value, rangeDirection.value, brake]);
 }
 
+async function updateDayState(device){
+  const day = 1;
+  const characteristic = await getCharacteristic(
+      device, RCCAR_SERVICE_UUID, RCDAY_CHARACTERISTIC_UUID);
+  await writeCharacteristic(characteristic, [1,2,3]);
+}
+
 async function readCharacteristic(characteristic) {
     const response = await characteristic.readValue().catch(e => {
         onScreenLog(`Error reading ${characteristic.uuid}: ${e}`);
@@ -257,6 +267,10 @@ async function writeCharacteristic(characteristic, command) {
         throw e;
     });
     //onScreenLog(`Wrote ${characteristic.uuid}: ${command}`);
+}
+
+async function writeDateCharacteristic(characteristic, command) {
+  // await characteristic.writeValue()
 }
 
 async function getCharacteristic(device, serviceId, characteristicId) {
