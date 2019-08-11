@@ -162,7 +162,7 @@ function initializeCardForDevice(device) {
     template.querySelector('.range-direction').addEventListener('change', () => {
         updateCarState(device, 0).catch(e => onScreenLog(`ERROR on updateCarState(): ${e}\n${e.stack}`));
     });
-    template.querySelector('.omake-submit').addEventListener('change', () => {
+    template.querySelector('.omake-submit').addEventListener('click', () => {
         updateDayState(device).catch(e => onScreenLog(`ERROR on updateDayState(): ${e}\n${e.stack}`));
     });
     template.querySelector('.range-speed').addEventListener('change', () => {
