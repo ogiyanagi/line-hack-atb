@@ -242,6 +242,7 @@ async function updateCarState(device, brake) {
 
 async function updateDayState(device){
   const day = 1;
+  onScreenLog('ほげほげ');
   const characteristic = await getCharacteristic(
       device, RCCAR_SERVICE_UUID, RCDAY_CHARACTERISTIC_UUID);
   await writeCharacteristic(characteristic, [1,2,3]);
